@@ -16,13 +16,18 @@ if choice == 1:
 
 elif choice == 2:
     amount = int(input("Enter amount to deposit: "))
-    balance += amount
-    print("Deposit successful")
+    if amount > 0:
+        balance += amount
+        print("Deposit successful")
+    else:
+        print("Invalid deposit amount")
     print("Current balance:", balance)
 
 elif choice == 3:
     amount = int(input("Enter amount to withdraw: "))
-    if amount <= balance:
+    if amount <= 0:
+        print("Invalid withdrawal amount")
+    elif amount <= balance:
         balance -= amount
         print("Withdrawal successful")
         print("Current balance:", balance)
