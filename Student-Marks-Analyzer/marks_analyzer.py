@@ -1,5 +1,5 @@
 # Student Marks Analyzer
-# This program calculates total marks, percentage, and grade for a student
+# Version 2: Advanced with validation and subject-wise report
 
 def calculate_grade(percentage):
     if percentage >= 75:
@@ -14,24 +14,38 @@ def calculate_grade(percentage):
         return "Fail"
 
 
-# Take student details
+def get_marks(subjects):
+    marks_list = []
+    for i in range(1, subjects + 1):
+        while True:
+            marks = int(input(f"Enter marks for subject {i} (0–100): "))
+            if 0 <= marks <= 100:
+                marks_list.append(marks)
+                break
+            else:
+                print("Invalid marks. Please enter between 0 and 100.")
+    return marks_list
+
+
+# Student details
 name = input("Enter student name: ")
-
-# Take marks input
 subjects = int(input("Enter number of subjects: "))
-total_marks = 0
 
-for i in range(1, subjects + 1):
-    marks = int(input(f"Enter marks for subject {i}: "))
-    total_marks += marks
+# Input marks
+marks = get_marks(subjects)
 
 # Calculations
+total_marks = sum(marks)
 percentage = total_marks / subjects
 grade = calculate_grade(percentage)
 
 # Output
-print("\n--- Result ---")
-print("Student Name:", name)
+print("\n--- Student Result ---")
+print("Name:", name)
+
+for i, m in enumerate(marks, start=1):
+    print(f"Subject {i}: {m}")
+
 print("Total Marks:", total_marks)
 print("Percentage:", round(percentage, 2))
 print("Grade:", grade)
